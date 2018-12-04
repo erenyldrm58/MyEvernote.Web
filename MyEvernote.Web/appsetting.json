@@ -1,0 +1,5 @@
+{
+  "ConnectionStrings": {
+    "MyEvernoteConnectiontest": "Server=(localdb)\\MSSQLLocalDB;Database=MyEvernoteDB;User ID=sa;Password=43849212;Provider=System.Sql.DataClient;Trusted_Connection=True;MultipleActiveResultSets=true",
+  }
+}
