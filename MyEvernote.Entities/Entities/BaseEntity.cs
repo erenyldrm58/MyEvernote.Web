@@ -1,4 +1,4 @@
-﻿ using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -6,14 +6,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MyEvernote.Core
+namespace MyEvernote.Entities
 {
-    [Table("Likeds")]
-    public class Liked
+    public class BaseEntity
     {
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
-        public Note Note{ get; set; }
-        public EvernoteUser LikedUser { get; set; }
+        [Required]
+        public DateTime CreatedOn { get; set; }
+        [Required]
+        public DateTime ModifiedOn { get; set; }
+        [Required, StringLength(30)]
+        public string ModifiedBy { get; set; }
+
     }
 }

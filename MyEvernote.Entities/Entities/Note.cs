@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MyEvernote.Core
+namespace MyEvernote.Entities
 {
     [Table("Notes")]
     public class Note : BaseEntity

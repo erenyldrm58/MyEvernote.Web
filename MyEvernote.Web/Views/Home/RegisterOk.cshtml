@@ -1,0 +1,30 @@
+﻿
+@{
+    ViewBag.Title = "Kayıt Başarılı";
+}
+
+<link href="~/Content/login.css" rel="stylesheet" />
+
+<section class="login-info">
+    <div class="container">
+        <div class="row main">
+            <div class="form-header">
+                <h1 class="text-center ">Yönlendiriliyorsunuz..</h1>
+            </div>
+            <div class="main-content">
+                <div class="text-success">
+                    <h2><span class="glyphicon glyphicon-ok"></span>&nbsp;&nbsp;&nbsp;Kayıt Oldunuz..</h2>
+                    <hr />
+                    <p class="text-justify">
+                        E-posta adresinize gelen aktivasyon linkine tıklayarak hesabınızı aktive edebilirsiniz.
+                        Hesabınızı aktive etmeden not ekleme ve gönderi beğenme işlemi yapamazsınız.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section footer{
+    @Html.Partial("_PartialFooter")
+}

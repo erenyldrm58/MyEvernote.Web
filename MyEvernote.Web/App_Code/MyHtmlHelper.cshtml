@@ -1,0 +1,28 @@
+﻿@helper LinkButton(string id = "", string url = "", string color = "", string extraClass = "", string title = "", string icon = "", string text = "")
+{
+    <a href="@url" class="btn btn-@color @extraClass" title="@title">
+        <span class="glyphicon glyphicon-@icon"></span> @text
+    </a>
+}
+
+@helper LinkButton(string url = "", string color = "", string extraClass = "", string title = "", string icon = "", string text = "")
+{
+    <a href="@url" class="btn btn-@color @extraClass" title="@title">
+        <span class="glyphicon glyphicon-@icon"></span> @text
+    </a>
+}
+
+
+@helper Button(string type = "button", string color = "", string extraClass = "", string icon = "", string text = "")
+{
+    <button type="@type" class="btn btn-@color @extraClass">
+        <span class="glyphicon glyphicon-@icon"></span> @text
+    </button>
+}
+
+@helper Button(string id = "", string type = "button", string color = "", string extraClass = "", string icon = "", string text = "")
+{
+    <button id="@id" name="@id" type="@type" class="btn btn-@color @extraClass">
+        <span class="glyphicon glyphicon-@icon"></span> @text
+    </button>
+}

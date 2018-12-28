@@ -1,0 +1,35 @@
+﻿@using MyEvernote.Entities.Messages
+
+@model List<ErrorMessage>
+
+@{
+    ViewBag.Title = "Hesap Geçersiz";
+}
+
+<link href="~/Content/login.css" rel="stylesheet" />
+
+<section class="login-info">
+    <div class="container">
+        <div class="row main">
+            <div class="form-header">
+                <h1 class="text-center ">Yönlendiriliyorsunuz..</h1>
+            </div>
+            <div class="main-content">
+                <div class="text-success">
+                    <h2><span class="glyphicon glyphicon-ok"></span>&nbsp;&nbsp;&nbsp;Hesap geçerli değil..</h2>
+                    <hr />
+                    <p class="text-justify">
+                        @foreach (ErrorMessage error in Model)
+                        {
+                            @error.Message <br>
+                        }
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section footer{
+    @Html.Partial("_PartialFooter")
+}

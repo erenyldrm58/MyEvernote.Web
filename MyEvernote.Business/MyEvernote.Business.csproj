@@ -48,22 +48,37 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CommentManager.cs" />
+    <Compile Include="LikedManager.cs" />
+    <Compile Include="Results\BusinessResult.cs" />
+    <Compile Include="CategoryManager.cs" />
+    <Compile Include="Abstract\ManagerBase.cs" />
+    <Compile Include="UserManager.cs" />
+    <Compile Include="NoteManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Test.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\MyEvernote.Common\MyEvernote.Common.csproj">
+      <Project>{87a73c50-3380-4bfe-b613-0828de1e7c82}</Project>
+      <Name>MyEvernote.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\MyEvernote.Core\MyEvernote.Core.csproj">
-      <Project>{66d320ac-f214-4efd-b798-f9545019df30}</Project>
+      <Project>{243e0f60-aeed-4312-86d4-e0780bbefa07}</Project>
       <Name>MyEvernote.Core</Name>
     </ProjectReference>
     <ProjectReference Include="..\MyEvernote.DAL\MyEvernote.Data.csproj">
       <Project>{1842f156-df56-4d0d-a697-b3089d385042}</Project>
       <Name>MyEvernote.Data</Name>
     </ProjectReference>
+    <ProjectReference Include="..\MyEvernote.Entities\MyEvernote.Entities.csproj">
+      <Project>{9ffc0f5d-4024-4492-919a-60a92d9ec96a}</Project>
+      <Name>MyEvernote.Entities</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

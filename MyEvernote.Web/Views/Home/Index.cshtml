@@ -1,4 +1,6 @@
-﻿
+﻿@using MyEvernote.Entities;
+@model List<Note>
+
 @{
     ViewBag.Title = "Index";
 }
@@ -7,13 +9,7 @@
     <div class="row">
         <!-- Kategoriler -->
         <div class="col-md-3">
-            <p class="lead">Kategoriler</p>
-            <div class="list-group">
-                <a href="#" class="list-group-item"><span class="glyphicon glyphicon-arrow-right"></span> Tümü</a>
-                <a href="#" class="list-group-item"><span class="glyphicon glyphicon-arrow-right"></span> Category 1</a>
-                <a href="#" class="list-group-item"><span class="glyphicon glyphicon-arrow-right"></span> Category 2</a>
-                <a href="#" class="list-group-item"><span class="glyphicon glyphicon-arrow-right"></span> Category 3</a>
-            </div>
+            @Html.Partial("_PartialCategories");
         </div>
         <div class="col-md-9">
             <!-- Carousel -->
@@ -46,189 +42,56 @@
                 </div>
             </div>
             <div class="row">
-                <!-- Yazılar -->
-                <div class="col-sm-4 col-lg-4 col-md-4">
-                    <div class="thumbnail">
-                        <img src="http://placehold.it/320x150" alt="">
-                        <div class="caption">
-                            <h4>
-                                <a href="#">First Product</a>
-                            </h4>
-                            <p>This is a short description. Lorem ipsum dolor sit amet</p>
-                        </div>
+                <!-- Notlar -->
+                @foreach (Note note in Model)
+                {
+                    <div class="col-sm-4 col-lg-4 col-md-4">
+                        <div class="thumbnail">
+                            <img src="http://placehold.it/320x150" alt="@note.Title">
+                            <div class="caption">
+                                <h4>
+                                    <a href="#">@note.Title</a>
+                                </h4>
 
-                        <div class="commentInfo">
-                            <p class="pull-right">
-                                <h6 class="text-right">
-                                    <span class="glyphicon glyphicon-user"> Eren Yıldırım</span><br />
-                                    <span class="glyphicon glyphicon-time"> 29.11.2018 14:25</span>
-                                </h6>
-                            </p>
-                        </div>
+                                @if (!string.IsNullOrEmpty(note.Text) && note.Text.Length > 60)
+                                {
+                                    <p>@(note.Text.Substring(0, 60) + "..");</p>
+                                    <p><a href="#" class="btn btn-default btn-sm">devamı <span class="glyphicon glyphicon-chevron-right"></span></a></p>
+                                }
+                                else
+                                {
+                                    <p>@note.Text;</p>
+                                }
 
-                        <hr />
-                        <div class="ratings">
-                            <p class="pull-right">
-                                <button class="btn btn-default btn-sm" type="button"><span class="glyphicon glyphicon-comment"></span> Yorumlar</button>
-                            </p>
-                            <p>
-                                <button class="btn btn-default btn-sm" type="button"><span class="glyphicon glyphicon-star-empty"></span> 14</button>
-                            </p>
+                            </div>
+
+                            <div class="commentInfo">
+                                <p class="pull-right">
+                                    <h6 class="text-right">
+                                        @note.Owner.Username <span class="glyphicon glyphicon-user"> </span><br />
+                                        @note.ModifiedOn.ToString("dd.MM.yy HH:mm") <span class="glyphicon glyphicon-time"> </span>
+                                    </h6>
+                                </p>
+                            </div>
+
+                            <hr />
+                            <div class="ratings">
+                                <p class="pull-right">
+                                    <button class="btn btn-default btn-sm" type="button"><span class="glyphicon glyphicon-comment"></span> Yorumlar</button>
+                                </p>
+                                <p>
+                                    <button class="btn btn-default btn-sm" type="button"><span class="glyphicon glyphicon-star-empty"></span> @note.LikeCount</button>
+                                </p>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-sm-4 col-lg-4 col-md-4">
-                    <div class="thumbnail">
-                        <img src="http://placehold.it/320x150" alt="">
-                        <div class="caption">
-                            <h4>
-                                <a href="#">First Product</a>
-                            </h4>
-                            <p>This is a short description. Lorem ipsum dolor sit amet</p>
-                        </div>
+                }
 
-                        <div class="commentInfo">
-                            <p class="pull-right">
-                                <h6 class="text-right">
-                                    <span class="glyphicon glyphicon-user"> Eren Yıldırım</span><br />
-                                    <span class="glyphicon glyphicon-time"> 29.11.2018 14:25</span>
-                                </h6>
-                            </p>
-                        </div>
-
-                        <hr />
-                        <div class="ratings">
-                            <p class="pull-right">
-                                <button class="btn btn-default btn-sm" type="button"><span class="glyphicon glyphicon-comment"></span> Yorumlar</button>
-                            </p>
-                            <p>
-                                <button class="btn btn-default btn-sm" type="button"><span class="glyphicon glyphicon-star-empty"></span> 14</button>
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-4 col-lg-4 col-md-4">
-                    <div class="thumbnail">
-                        <img src="http://placehold.it/320x150" alt="">
-                        <div class="caption">
-                            <h4>
-                                <a href="#">First Product</a>
-                            </h4>
-                            <p>This is a short description. Lorem ipsum dolor sit amet</p>
-                        </div>
-
-                        <div class="commentInfo">
-                            <p class="pull-right">
-                                <h6 class="text-right">
-                                    <span class="glyphicon glyphicon-user"> Eren Yıldırım</span><br />
-                                    <span class="glyphicon glyphicon-time"> 29.11.2018 14:25</span>
-                                </h6>
-                            </p>
-                        </div>
-
-                        <hr />
-                        <div class="ratings">
-                            <p class="pull-right">
-                                <button class="btn btn-default btn-sm" type="button"><span class="glyphicon glyphicon-comment"></span> Yorumlar</button>
-                            </p>
-                            <p>
-                                <button class="btn btn-default btn-sm" type="button"><span class="glyphicon glyphicon-star-empty"></span> 14</button>
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-4 col-lg-4 col-md-4">
-                    <div class="thumbnail">
-                        <img src="http://placehold.it/320x150" alt="">
-                        <div class="caption">
-                            <h4>
-                                <a href="#">First Product</a>
-                            </h4>
-                            <p>This is a short description. Lorem ipsum dolor sit amet</p>
-                        </div>
-
-                        <div class="commentInfo">
-                            <p class="pull-right">
-                                <h6 class="text-right">
-                                    <span class="glyphicon glyphicon-user"> Eren Yıldırım</span><br />
-                                    <span class="glyphicon glyphicon-time"> 29.11.2018 14:25</span>
-                                </h6>
-                            </p>
-                        </div>
-
-                        <hr />
-                        <div class="ratings">
-                            <p class="pull-right">
-                                <button class="btn btn-default btn-sm" type="button"><span class="glyphicon glyphicon-comment"></span> Yorumlar</button>
-                            </p>
-                            <p>
-                                <button class="btn btn-default btn-sm" type="button"><span class="glyphicon glyphicon-star-empty"></span> 14</button>
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-4 col-lg-4 col-md-4">
-                    <div class="thumbnail">
-                        <img src="http://placehold.it/320x150" alt="">
-                        <div class="caption">
-                            <h4>
-                                <a href="#">First Product</a>
-                            </h4>
-                            <p>This is a short description. Lorem ipsum dolor sit amet</p>
-                        </div>
-
-                        <div class="commentInfo">
-                            <p class="pull-right">
-                                <h6 class="text-right">
-                                    <span class="glyphicon glyphicon-user"> Eren Yıldırım</span><br />
-                                    <span class="glyphicon glyphicon-time"> 29.11.2018 14:25</span>
-                                </h6>
-                            </p>
-                        </div>
-
-                        <hr />
-                        <div class="ratings">
-                            <p class="pull-right">
-                                <button class="btn btn-default btn-sm" type="button"><span class="glyphicon glyphicon-comment"></span> Yorumlar</button>
-                            </p>
-                            <p>
-                                <button class="btn btn-default btn-sm" type="button"><span class="glyphicon glyphicon-star-empty"></span> 14</button>
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-4 col-lg-4 col-md-4">
-                    <div class="thumbnail">
-                        <img src="http://placehold.it/320x150" alt="">
-                        <div class="caption">
-                            <h4>
-                                <a href="#">First Product</a>
-                            </h4>
-                            <p>This is a short description. Lorem ipsum dolor sit amet</p>
-                        </div>
-
-                        <div class="commentInfo">
-                            <p class="pull-right">
-                                <h6 class="text-right">
-                                    <span class="glyphicon glyphicon-user"> Eren Yıldırım</span><br />
-                                    <span class="glyphicon glyphicon-time"> 29.11.2018 14:25</span>
-                                </h6>
-                            </p>
-                        </div>
-
-                        <hr />
-                        <div class="ratings">
-                            <p class="pull-right">
-                                <button class="btn btn-default btn-sm" type="button"><span class="glyphicon glyphicon-comment"></span> Yorumlar</button>
-                            </p>
-                            <p>
-                                <button class="btn btn-default btn-sm" type="button"><span class="glyphicon glyphicon-star-empty"></span> 14</button>
-                            </p>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
     </div>
 </div>
 
+@section footer{
+    @Html.Partial("_PartialFooter")
+}

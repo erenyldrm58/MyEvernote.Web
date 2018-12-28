@@ -1,4 +1,4 @@
-﻿using MyEvernote.Core;
+﻿using MyEvernote.Entities;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MyEvernote.DAL
+namespace MyEvernote.DAL.EntityFramework
 {
     public class MyInitializer : CreateDatabaseIfNotExists<MyEvernoteDbContext>
     {
@@ -24,6 +24,7 @@ namespace MyEvernote.DAL
                 IsAdmin = true,
                 Username = "erenn_yldrm",
                 Password = "12345",
+                ProfileImgFileName = "user_boy.png",
                 CreatedOn = DateTime.Now,
                 ModifiedOn = DateTime.Now.AddMinutes(5),
                 ModifiedBy = "erenn_yldrm"
@@ -40,6 +41,7 @@ namespace MyEvernote.DAL
                 IsAdmin = false,
                 Username = "ahmetdgn",
                 Password = "12345",
+                ProfileImgFileName = "user_boy.png",
                 CreatedOn = DateTime.Now.AddHours(1),
                 ModifiedOn = DateTime.Now.AddMinutes(65),
                 ModifiedBy = "ahmetdgn"
@@ -62,6 +64,7 @@ namespace MyEvernote.DAL
                     IsAdmin = false,
                     Username = $"user{i}",
                     Password = "12345",
+                    ProfileImgFileName = "user_boy.png",
                     CreatedOn = DateTime.Now.AddHours(1),
                     ModifiedOn = DateTime.Now.AddMinutes(65),
                     ModifiedBy = $"user{i}"
