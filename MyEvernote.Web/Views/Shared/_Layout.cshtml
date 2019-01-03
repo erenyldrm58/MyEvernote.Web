@@ -49,37 +49,30 @@
                                 <span class=" glyphicon glyphicon-wrench"></span> Yönetim <span class="caret"></span>
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a href="/Note/MyNotes"><span class=" glyphicon glyphicon-th-list"></span> Notlarım</a></li>
-                                <li><a href="/Note/MyLikedNotes"><span class=" glyphicon glyphicon-heart"></span> Beğendiklerim</a></li>
+                                <li>@MyHtmlHelper.LinkMenu("/Note/MyNotes", "th-list", "Notlarım")</li>
+                                <li>@MyHtmlHelper.LinkMenu("/Note/MyLikedNotes", "heart", "Beğendiklerim")</li>
                                 <li role="separator" class="divider"></li>
 
                                 @if (user.IsAdmin)
                                 {
-                                    <li><a href="/Category/Create"><span class=" glyphicon glyphicon-plus"></span> Kategori Ekle</a></li>
-                                    <li><a href="/Category/Index"><span class=" glyphicon glyphicon-th-list"></span> Kategoriler</a></li>
+                                    <li>@MyHtmlHelper.LinkMenu("/Category/Create", "plus", "Kategori Ekle")</li>
+                                    <li>@MyHtmlHelper.LinkMenu("/Category/Index", "th-list", "Kategoriler")</li>
+                                    <li role="separator" class="divider"></li>
+                                    <li>@MyHtmlHelper.LinkMenu("/User/Create", "plus", "Kullanıcı Ekle")</li>
+                                    <li>@MyHtmlHelper.LinkMenu("/User/Index", "th-list", "Kullanıcılar")</li>
                                 }
                             </ul>
                         </li>
                     }
-
-                    <li>
-                        <a href="/Home/MostLiked"><span class=" glyphicon glyphicon-star"></span> En Beğenilenler</a>
-                    <li>
-                        <a href="/Home/Index"><span class=" glyphicon glyphicon-th-list"></span> Son Yazılar</a>
-                    </li>
-                    <li>
-                        <a href="/Home/About"><span class=" glyphicon glyphicon-info-sign"></span> Hakkımızda</a>
-                    </li>
+                    <li>@MyHtmlHelper.LinkMenu("/Home/MostLiked", "star", "En Beğenilenler")</li>
+                    <li>@MyHtmlHelper.LinkMenu("/Home/Index", "th-list", "Son Yazılar")</li>
+                    <li>@MyHtmlHelper.LinkMenu("/Home/About", "info-sign", "Hakkımızda")</li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     @if (user == null)
                     {
-                        <li>
-                            <a href="/Home/Login"><span class=" glyphicon glyphicon-log-in"></span> Giriş</a>
-                        </li>
-                        <li>
-                            <a href="/Home/Register"><span class=" glyphicon glyphicon-user"></span> Üye Ol</a>
-                        </li>
+                        <li>@MyHtmlHelper.LinkMenu("/Home/Login", "log-in", "Giriş")</li>
+                        <li>@MyHtmlHelper.LinkMenu("/Home/Register", "user", "Üye Ol")</li>
                     }
                     else
                     {
@@ -89,18 +82,17 @@
                             </a>
 
                             <ul class="dropdown-menu">
-                                <li><a href="/Home/ShowProfile"><span class=" glyphicon glyphicon-user"></span> Profili Göster </a></li>
-                                
+                                <li>@MyHtmlHelper.LinkMenu("/Home/ShowProfile", "user", "Profili Göster")</li>
+
                                 <li role="separator" class="divider"></li>
 
-                                <li><a href="/Home/EditProfile"><span class=" glyphicon glyphicon-edit"></span> Profili Düzenle </a></li>
+                                <li>@MyHtmlHelper.LinkMenu("/Home/EditProfile", "edit", "Profili Düzenle")</li>
+
                                 <li><a href="/Home/DeleteProfile" onclick="return confirm('Hesabınızı silmek istediğinize emin misiniz?')"><span class=" glyphicon glyphicon-trash"></span> Profili Sil </a></li>
                             </ul>
                         </li>
 
-                        <li>
-                            <a href="/Home/Logout"><span class=" glyphicon glyphicon-log-out"></span> Çıkış</a>
-                        </li>
+                        <li>@MyHtmlHelper.LinkMenu("/Home/Logout", "log-out", "Çıkış")</li>
                     }
                 </ul>
             </div>

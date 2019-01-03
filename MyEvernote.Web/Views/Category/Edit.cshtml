@@ -1,10 +1,12 @@
-﻿@model MyEvernote.Entities.Category
+﻿@using MyEvernote.Web
+@model MyEvernote.Entities.Category
 
 @{
     ViewBag.Title = "Edit";
 }
 
 <link href="~/Content/validationSummary.css" rel="stylesheet" />
+
 <div class="row">
     <div class="col-md-8 col-md-offset-2">
         <h2>Edit</h2><hr />
@@ -61,13 +63,15 @@
                 <div class="form-group">
                     <div class="col-md-10 col-md-offset-2">
                         <p>
-                            <button type="submit" class="btn btn-success">
+                            @MyHtmlHelper.Button("submit", "success", string.Empty, "floppy-saved", "Save")
+                            @*<button type="submit" class="btn btn-success">
                                 <span class="glyphicon glyphicon-floppy-saved"></span> Save
-                            </button>&nbsp;
+                            </button>&nbsp;*@
 
-                            <a href="/Category/Index" class="btn btn-default">
-                                <span class="glyphicon glyphicon-arrow-left"></span> Back To List
-                            </a>
+                            @MyHtmlHelper.LinkButton("/Category/Index", "default", string.Empty, string.Empty, "arrow-left", "Back To List")
+                            @*<a href="/Category/Index" class="btn btn-default">
+                                    <span class="glyphicon glyphicon-arrow-left"></span> Back To List
+                                </a>*@
                         </p>
                     </div>
                 </div>

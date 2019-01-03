@@ -31,6 +31,8 @@ namespace MyEvernote.DAL.EntityFramework
                 .HasMany(n => n.Likeds)
                 .WithRequired(c => c.Note)
                 .WillCascadeOnDelete(true);
+
+           
         }
     }
 }

@@ -19,35 +19,37 @@ namespace MyEvernote.Entities
             Likeds = new List<Liked>();
         }
 
-        [DisplayName("Ad"), 
+        [DisplayName("Ad"),
             StringLength(25, ErrorMessage = "{0} alanı max {1} karakter olmalıdır.")]
         public string Name { get; set; }
 
-        [DisplayName("Soyad"), 
+        [DisplayName("Soyad"),
             StringLength(25, ErrorMessage = "{0} alanı max {1} karakter olmalıdır.")]
         public string Surname { get; set; }
 
-        [DisplayName("Kullanıcı Adı"), 
-            Required(ErrorMessage ="{0} alanı gereklidir."), 
+        [DisplayName("Kullanıcı Adı"),
+            Required(ErrorMessage = "{0} alanı gereklidir."),
             StringLength(25, ErrorMessage = "{0} alanı max {1} karakter olmalıdır.")]
         public string Username { get; set; }
 
-        [DisplayName("E-Posta"), 
-            Required(ErrorMessage = "{0} alanı gereklidir."), 
+        [DisplayName("E-Posta"),
+            Required(ErrorMessage = "{0} alanı gereklidir."),
             StringLength(70, ErrorMessage = "{0} alanı max {1} karakter olmalıdır.")]
         public string Email { get; set; }
 
-        [DisplayName("Şifre"), 
-            Required(ErrorMessage = "{0} alanı gereklidir."), 
+        [DisplayName("Şifre"),
+            Required(ErrorMessage = "{0} alanı gereklidir."),
             StringLength(25, ErrorMessage = "{0} alanı max {1} karakter olmalıdır.")]
         public string Password { get; set; }
 
-        [StringLength(30)]
+        [StringLength(30), ScaffoldColumn(false)]
         public string ProfileImgFileName { get; set; } // Images/user_1.jpg
-        public bool IsActive { get; set; }
+        [DisplayName("Is Active")]
+            public bool IsActive { get; set; }
+        [DisplayName("Is Admin")]
         public bool IsAdmin { get; set; }
-        [Required]
-        public Guid ActivateGuid  { get; set; }
+        [Required, ScaffoldColumn(false)]
+        public Guid ActivateGuid { get; set; }
 
         public virtual List<Note> Notes { get; set; }
         public virtual List<Comment> Comments { get; set; }

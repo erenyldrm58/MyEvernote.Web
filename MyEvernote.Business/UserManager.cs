@@ -25,7 +25,7 @@ namespace MyEvernote.Business
             }
             else
             {
-                int insertCount = Insert(new EvernoteUser()
+                int insertCount = base.Insert(new EvernoteUser()
                 {
                     Username = model.UserName,
                     Email = model.Email,
@@ -111,7 +111,7 @@ namespace MyEvernote.Business
             BusinessResult<EvernoteUser> result = new BusinessResult<EvernoteUser>();
             EvernoteUser dbUser = Find(x => x.Id != data.Id && (x.Username == data.Username || x.Email == data.Email));
 
-            if (result.Result != null && dbUser.Id != data.Id)
+            if (dbUser != null && dbUser.Id != data.Id)
             {
                 if (dbUser.Username == data.Username)
                     result.AddError(ErrorMessageCode.UsernameAlreadyExist, "Kullanıcı adı kayıtlı.");
@@ -130,7 +130,7 @@ namespace MyEvernote.Business
             if (string.IsNullOrEmpty(data.ProfileImgFileName) == false)
                 result.Result.ProfileImgFileName = data.ProfileImgFileName;
 
-            if (Update(result.Result) == 0)
+            if (base.Update(result.Result) == 0)
             {
                 result.AddError(ErrorMessageCode.ProfileCouldNotUpdated, "Profile Güncellenemedi");
             }
@@ -154,6 +154,69 @@ namespace MyEvernote.Business
             else
             {
                 result.AddError(ErrorMessageCode.UserNotFound, "Kullanıcı bulunamadı");
+            }
+
+            return result;
+        }
+
+        //Metod hiding
+        public new BusinessResult<EvernoteUser> Insert(EvernoteUser model)
+        {
+            EvernoteUser user = Find(x => x.Username == model.Username || x.Email == model.Email);
+            BusinessResult<EvernoteUser> userResult = new BusinessResult<EvernoteUser>();
+
+            userResult.Result = model;
+
+            if (user != null)
+            {
+                if (user.Username == model.Username)
+                    userResult.AddError(ErrorMessageCode.UsernameAlreadyExist, "Kullanıcı adı kayıtlı.");
+
+                if (user.Email == model.Email)
+                    userResult.AddError(ErrorMessageCode.EmailAlreadyExist, "E-posta adresi kayıtlı.");
+            }
+            else
+            {
+                userResult.Result.ActivateGuid = Guid.NewGuid();
+                userResult.Result.ProfileImgFileName = "user_boy.png";
+
+                int insertCount = base.Insert(userResult.Result);
+
+                if (insertCount == 0)
+                {
+                    userResult.AddError(ErrorMessageCode.UserCouldNotInserted, "Kullanıcı eklenemedi.");
+                }
+            }
+
+            return userResult;
+        }
+
+        public new BusinessResult<EvernoteUser> Update(EvernoteUser data)
+        {
+            BusinessResult<EvernoteUser> result = new BusinessResult<EvernoteUser>();
+            EvernoteUser dbUser = Find(x => x.Id != data.Id && (x.Username == data.Username || x.Email == data.Email));
+            result.Result = data;
+            if (dbUser != null && dbUser.Id != data.Id)
+            {
+                if (dbUser.Username == data.Username)
+                    result.AddError(ErrorMessageCode.UsernameAlreadyExist, "Kullanıcı adı kayıtlı.");
+                if (dbUser.Email == data.Email)
+                    result.AddError(ErrorMessageCode.EmailAlreadyExist, "E-posta adresi kayıtlı.");
+
+                return result;
+            }
+            result.Result = Find(x => x.Id == data.Id);
+            result.Result.Name = data.Name;
+            result.Result.Surname = data.Surname;
+            result.Result.Email = data.Email;
+            result.Result.Password = data.Password;
+            result.Result.Username = data.Username;
+            result.Result.IsActive = data.IsActive;
+            result.Result.IsAdmin = data.IsAdmin;
+
+            if (base.Update(result.Result) == 0)
+            {
+                result.AddError(ErrorMessageCode.UserCouldNotUpdated, "Kullanıcı Güncellenemedi");
             }
 
             return result;

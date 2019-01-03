@@ -60,12 +60,8 @@
 
     <div class="col-md-8 col-md-offset-2">
         <p>
-            <a href="/Category/Edit/@Model.Id" class="btn btn-warning">
-                <span class="glyphicon glyphicon-edit"></span> Edit
-            </a>
-            <a href="/Category/Index" class="btn btn-default">
-                <span class="glyphicon glyphicon-arrow-left"></span> Back To List
-            </a>
+            @MyHtmlHelper.LinkButton("/Category/Edit/" + @Model.Id, "warning", string.Empty, string.Empty, "edit", "Edit")
+            @MyHtmlHelper.LinkButton("/Category/Index", "default", string.Empty, string.Empty, "arrow-left", "Back To List")
         </p>
-    </div>    
+    </div>
 </div>

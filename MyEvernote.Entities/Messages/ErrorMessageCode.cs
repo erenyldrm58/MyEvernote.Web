@@ -10,6 +10,8 @@
         ActiveIdDoesNotExist =154,
         UserNotFound = 155,
         ProfileCouldNotUpdated = 156,
-        UserCouldNotRemove = 157
+        UserCouldNotRemove = 157,
+        UserCouldNotInserted = 158,
+        UserCouldNotUpdated = 159
     }
 }
