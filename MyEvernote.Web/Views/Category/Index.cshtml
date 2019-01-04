@@ -56,11 +56,11 @@
                         @Html.DisplayFor(modelItem => item.ModifiedBy)
                     </td>
                     <td>
-                        @MyHtmlHelper.LinkButton("/Category/Edit/" + @item.Id, "warning", "btn-xs", "Edit", "edit", string.Empty);
+                        @MyHtmlHelper.LinkButton("/Category/Edit/" + @item.Id, "warning", "btn-xs", "Edit", "edit", string.Empty)
 
-                        @MyHtmlHelper.LinkButton("/Category/Details/" + @item.Id, "info", "btn-xs", "Details", "search", string.Empty);
+                        @MyHtmlHelper.LinkButton("/Category/Details/" + @item.Id, "info", "btn-xs", "Details", "search", string.Empty)
 
-                        @MyHtmlHelper.LinkButton("/Category/Delete/" + @item.Id, "danger", "btn-xs", "Delete", "trash", string.Empty);
+                        @MyHtmlHelper.LinkButton("/Category/Delete/" + @item.Id, "danger", "btn-xs", "Delete", "trash", string.Empty)
 
 
                         @*<a href="/Category/Edit/@item.Id" class="btn btn-warning btn-xs" title="Edit">
