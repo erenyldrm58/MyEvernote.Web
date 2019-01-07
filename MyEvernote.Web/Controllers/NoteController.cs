@@ -12,6 +12,7 @@ namespace MyEvernote.Web.Controllers
     {
         NoteManager nm = new NoteManager();
         CategoryManager cm = new CategoryManager();
+        LikedManager lm = new LikedManager();
 
         // GET: Note
         public ActionResult Index()
@@ -20,6 +21,16 @@ namespace MyEvernote.Web.Controllers
                .OrderByDescending(x => x.ModifiedOn);
 
             return View(nm.ListQueryable());
+        }
+
+        public ActionResult MyLikedNotes()
+        {
+            var note = lm.ListQueryable().Include("LikedUser").Include("Note")
+                .Where(x => x.LikedUser.Id == CurrentSession.User.Id)
+                .Select(x => x.Note).Include("Category").Include("Owner")
+                .OrderByDescending(x => x.ModifiedOn);
+
+            return View("Index", note.ToList());
         }
 
         // GET: Note/Details/5
@@ -55,6 +66,7 @@ namespace MyEvernote.Web.Controllers
 
             if (ModelState.IsValid)
             {
+                note.Owner = CurrentSession.User;
                 nm.Insert(note);
                 return RedirectToAction("Index");
             }
