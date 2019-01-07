@@ -1,5 +1,6 @@
 ﻿using MyEvernote.Business;
 using MyEvernote.Entities;
+using MyEvernote.Web.Models;
 using System.Net;
 using System.Web.Mvc;
 
@@ -48,6 +49,8 @@ namespace MyEvernote.Web.Controllers
             if (ModelState.IsValid)
             {
                 cm.Insert(category);
+                CacheHelper.RemoveCategoriesFromCache();
+
                 return RedirectToAction("Index");
             }
 
@@ -88,6 +91,7 @@ namespace MyEvernote.Web.Controllers
 
                 cm.Update(cat);
 
+                CacheHelper.RemoveCategoriesFromCache();
                 return RedirectToAction("Index");
             }
             return View(category);
@@ -116,6 +120,7 @@ namespace MyEvernote.Web.Controllers
             Category category = cm.Find(x => x.Id == id);
             cm.Delete(category);
 
+            CacheHelper.RemoveCategoriesFromCache();
             return RedirectToAction("Index");
         }
     }

@@ -1,4 +1,5 @@
 ﻿@using MyEvernote.Entities
+@using MyEvernote.Web.Models
 
 <!DOCTYPE html>
 <html>
@@ -17,15 +18,6 @@
     <script src="~/Scripts/bootstrap.min.js"></script>
 </head>
 <body>
-    @{
-        EvernoteUser user = null;
-
-        if (Session["login"] != null)
-        {
-            user = Session["login"] as EvernoteUser;
-        }
-
-    }
     <!-- Navigation -->
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
         <div class="container">
@@ -42,7 +34,7 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
-                    @if (user != null)
+                    @if (CurrentSession.User != null)
                     {
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -54,7 +46,7 @@
                                 <li>@MyHtmlHelper.LinkMenu("/Note/MyLikedNotes", "heart", "Beğendiklerim")</li>
                                 <li role="separator" class="divider"></li>
 
-                                @if (user.IsAdmin)
+                                @if (CurrentSession.User.IsAdmin)
                                 {
                                     <li>@MyHtmlHelper.LinkMenu("/Category/Create", "plus", "Kategori Ekle")</li>
                                     <li>@MyHtmlHelper.LinkMenu("/Category/Index", "th-list", "Kategoriler")</li>
@@ -70,7 +62,7 @@
                     <li>@MyHtmlHelper.LinkMenu("/Home/About", "info-sign", "Hakkımızda")</li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
-                    @if (user == null)
+                    @if (CurrentSession.User == null)
                     {
                         <li>@MyHtmlHelper.LinkMenu("/Home/Login", "log-in", "Giriş")</li>
                         <li>@MyHtmlHelper.LinkMenu("/Home/Register", "user", "Üye Ol")</li>
@@ -79,7 +71,7 @@
                     {
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class=" glyphicon glyphicon-user"></span> @user.Username <span class="caret"></span>
+                                <span class=" glyphicon glyphicon-user"></span>@CurrentSession.User.Username <span class="caret"></span>
                             </a>
 
                             <ul class="dropdown-menu">

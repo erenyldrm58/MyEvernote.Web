@@ -3,6 +3,7 @@ using MyEvernote.Business.Results;
 using MyEvernote.Entities;
 using MyEvernote.Entities.Messages;
 using MyEvernote.Entities.ViewModels;
+using MyEvernote.Web.Models;
 using MyEvernote.Web.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -55,8 +56,7 @@ namespace MyEvernote.Web.Controllers
 
         public ActionResult ShowProfile()
         {
-            EvernoteUser currentUser = Session["login"] as EvernoteUser;
-            BusinessResult<EvernoteUser> profileResult = um.GetUserById(currentUser.Id);
+            BusinessResult<EvernoteUser> profileResult = um.GetUserById(CurrentSession.User.Id);
 
             if (profileResult.Errors.Count > 0)
             {
@@ -74,8 +74,7 @@ namespace MyEvernote.Web.Controllers
 
         public ActionResult EditProfile()
         {
-            EvernoteUser currentUser = Session["login"] as EvernoteUser;
-            BusinessResult<EvernoteUser> profileResult = um.GetUserById(currentUser.Id);
+            BusinessResult<EvernoteUser> profileResult = um.GetUserById(CurrentSession.User.Id);
 
             if (profileResult.Errors.Count > 0)
             {
@@ -122,15 +121,16 @@ namespace MyEvernote.Web.Controllers
                     return View("Error", errorModel);
                 }
 
-                Session["login"] = editResult.Result;//Profil güncellendiği için session güncellendi
+                //Profil güncellendiği için session güncellendi
+                CurrentSession.Set<EvernoteUser>("login", editResult.Result);
+
                 return RedirectToAction("ShowProfile");
             }
             return View(model);
         }
         public ActionResult DeleteProfile()
         {
-            EvernoteUser currentUser = Session["login"] as EvernoteUser;
-            BusinessResult<EvernoteUser> deleteResult = um.RemoveUserById(currentUser.Id);
+            BusinessResult<EvernoteUser> deleteResult = um.RemoveUserById(CurrentSession.User.Id);
 
             if (deleteResult.Errors.Count > 0)
             {
@@ -173,7 +173,7 @@ namespace MyEvernote.Web.Controllers
                     return View(model);
                 }
 
-                Session["login"] = loginResult.Result;
+                CurrentSession.Set<EvernoteUser>("login", loginResult.Result);
                 return RedirectToAction("Index");
             }
             return View();
