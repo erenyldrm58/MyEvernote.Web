@@ -1,6 +1,5 @@
 ﻿@helper LinkButton(string id = "", string url = "", string color = "", string extraClass = "", string title = "", string icon = "", string text = "")
 {
-    /**/
     <a href="@url" class="btn btn-@color @extraClass" title="@title">
         <span class="glyphicon glyphicon-@icon"></span> @text
     </a>
@@ -8,7 +7,6 @@
 
 @helper LinkButton(string url = "", string color = "", string extraClass = "", string title = "", string icon = "", string text = "")
 {
-    /**/
     <a href="@url" class="btn btn-@color @extraClass" title="@title">
         <span class="glyphicon glyphicon-@icon"></span> @text
     </a>
@@ -17,7 +15,6 @@
 
 @helper Button(string type = "button", string color = "", string extraClass = "", string icon = "", string text = "")
 {
-    /**/
     <button type="@type" class="btn btn-@color @extraClass">
         <span class="glyphicon glyphicon-@icon"></span> @text
     </button>
@@ -25,7 +22,6 @@
 
 @helper Button(string id = "", string type = "button", string color = "", string extraClass = "", string icon = "", string text = "")
 {
-    /**/
     <button id="@id" name="@id" type="@type" class="btn btn-@color @extraClass">
         <span class="glyphicon glyphicon-@icon"></span> @text
     </button>
@@ -33,7 +29,6 @@
 
 @helper LinkMenu(string url = "", string icon = "", string text = "")
 {
-    /**/
     <li><a href="@url"><span class=" glyphicon glyphicon-@icon"></span> @text</a></li>
 }
 
@@ -45,7 +40,7 @@
             <div class="modal-content">
                 <div class="modal-header" id="@(id + "_header")">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="@(id + "_label")">@title</h4>
+                    <h4 class="modal-title text-center" id="@(id + "_label")">@title</h4>
                 </div>
                 <div class="modal-body" id="@(id + "_body")">
                     

@@ -1,32 +1,42 @@
 ﻿@using MyEvernote.Entities
+@using MyEvernote.Web.Models
 
 @model List<Comment>
 
-<div class="media">
-    <div class="media-object">
-        <span class="glyphicon glyphicon-comment"></span>
-    </div>
-    <div class="media-body">
-        <div>
-            <h5 class="mt-0">Media heading</h5>
-            <span>
-                Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
-            </span>
-            <span class="pull-right">
-                <button type="button" class="btn btn-warning btn-xs">
-                    <span class="glyphicon glyphicon-edit"></span>
-                </button>
+@{
+    EvernoteUser user = CurrentSession.User;
+}
 
-                <button type="button" class="btn btn-danger btn-xs">
-                    <span class="glyphicon glyphicon-trash"></span>
-                </button>
-            </span>
-            <br />
-            <small>
-                <span class="glyphicon glyphicon-time"></span> 23.11.2011 12:23:22&nbsp;&nbsp;&nbsp;&nbsp;
-                <span class="glyphicon glyphicon-user"></span> erenn
-            </small>
+@foreach (Comment item in Model)
+{
+    <div class="media">
+        <div class="media-left media-top">
+            <img src="~/Images/comment-icon.jpg" />
+        </div>
+        <div class="media-body">
+            <div>
+                <h5 class="mt-0"></h5>
+                <span class="col-md-10" id="comment_text_@item.Id" contenteditable="false">
+                    @item.Text
+                </span>
+                @if (user != null && user.Id == item.Owner.Id)
+                {
+                    <span class="col-md-2 btn-xs text-right">
+                        <button type="button" class="btn btn-warning btn-xs" data-edit-mode="false" onclick="doComment(this, 'edit_clicked', @item.Id, '#comment_text_@item.Id' );">
+                            <span class="glyphicon glyphicon-edit"></span>
+                        </button>
 
+                        <button type="button" class="btn btn-danger btn-xs">
+                            <span class="glyphicon glyphicon-trash"></span>
+                        </button>
+                    </span>
+                }
+                <small class="col-md-12 text-right">
+                    <span class="glyphicon glyphicon-time"></span> @item.ModifiedOn&nbsp;&nbsp;&nbsp;&nbsp;
+                    <span class="glyphicon glyphicon-user"></span> @item.Owner.Username
+                </small>
+
+            </div>
         </div>
     </div>
-</div>
+}

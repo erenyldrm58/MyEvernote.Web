@@ -111,6 +111,7 @@
     <Content Include="Content\shop-homepage.css" />
     <Content Include="Content\Site.css" />
     <Content Include="Content\validationSummary.css" />
+    <Content Include="Controllers\comment-icon.jpg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -124,6 +125,7 @@
     <Content Include="appsetting.json" />
     <Content Include="App_Code\MyHtmlHelper.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Images\comment-icon.jpg" />
     <Content Include="Images\user_boy.png" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
