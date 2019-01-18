@@ -193,5 +193,18 @@ namespace MyEvernote.Web.Controllers
             }
             return Json(new { hasError = true, errorMsg = "Beğenme işlemi gerçekleştirilemedi.", result = note.LikeCount});
         }
+
+        public ActionResult GetNoteText(int? id)
+        {
+            if (id == null)
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+
+            Note note = nm.Find(x => x.Id == id);
+
+            if (id == null)
+                return HttpNotFound();
+
+            return PartialView("_PartialNoteText", note);
+        }
     }
 }

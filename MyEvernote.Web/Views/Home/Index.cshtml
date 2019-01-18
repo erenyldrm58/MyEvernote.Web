@@ -51,7 +51,7 @@
                             <img src="http://placehold.it/320x150" alt="@note.Title">
                             <div class="caption">
                                 <h4>
-                                    <a href="#">
+                                    <a href="#" data-toggle="modal" data-target="#modal_not_detail" data-note-id="@note.Id">
                                         @note.Title
                                     </a>
                                 </h4>
@@ -59,7 +59,11 @@
                                 @if (!string.IsNullOrEmpty(note.Text) && note.Text.Length > 60)
                                 {
                                     <p>@(note.Text.Substring(0, 60) + "..")</p>
-                                    <p><a href="#" class="btn btn-default btn-sm">devamı <span class="glyphicon glyphicon-chevron-right"></span></a></p>
+                                    <p>
+                                        <a href="#" class="btn btn-default btn-sm" data-toggle="modal" data-target="#modal_not_detail" data-note-id="@note.Id">
+                                            devamı <span class="glyphicon glyphicon-chevron-right"></span>
+                                        </a>
+                                    </p>
                                 }
                                 else
                                 {
@@ -105,6 +109,8 @@
 }
 
 @MyHtmlHelper.ModalPopup(id: "modal_comment", title: "Yorumlar")
+@MyHtmlHelper.ModalPopup(id: "modal_not_detail", title: "Not Detayı")
 
 <script src="~/Scripts/Comment.js"></script>
 <script src="~/Scripts/Like.js"></script>
+<script src="~/Scripts/NoteDetailPopup.js"></script>
