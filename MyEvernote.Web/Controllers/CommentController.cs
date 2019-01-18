@@ -1,5 +1,6 @@
 ﻿using MyEvernote.Business;
 using MyEvernote.Entities;
+using MyEvernote.Web.Models;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
@@ -16,17 +17,13 @@ namespace MyEvernote.Web.Controllers
         public ActionResult ShowNoteComments(int? id)
         {
             if (id == null)
-            {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
 
             //Note note = nm.Find(x => x.Id == id);
             Note note = nm.ListQueryable().Include("Comments").FirstOrDefault(x => x.Id == id);
 
             if (note == null)
-            {
                 return HttpNotFound();
-            }
 
             return PartialView("_PartialComment", note.Comments);
         }
@@ -34,14 +31,12 @@ namespace MyEvernote.Web.Controllers
         public ActionResult Edit(int? id, string text)
         {
             if (id == null)
-            {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
 
             Comment comment = cm.Find(x => x.Id == id);
 
             if (comment == null)
-                return new HttpStatusCodeResult(HttpStatusCode.NotFound);
+                return new HttpNotFoundResult();
             else
                 comment.Text = text;
 
@@ -50,6 +45,47 @@ namespace MyEvernote.Web.Controllers
                 return Json(new { result = true }, JsonRequestBehavior.AllowGet);
             }
 
+            return Json(new { result = false }, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult Delete(int? id)
+        {
+            if (id == null)
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+
+            Comment comment = cm.Find(x => x.Id == id);
+
+            if (comment == null)
+                return new HttpNotFoundResult();
+
+            if (cm.Delete(comment) > 0)
+                return Json(new { result = true }, JsonRequestBehavior.AllowGet);
+
+            return Json(new { result = false }, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult Create(Comment comment, int? noteId)
+        {
+            ModelState.Remove("CreatedOn");
+            ModelState.Remove("ModifiedOn");
+            ModelState.Remove("ModifiedBy");
+
+            if (ModelState.IsValid)
+            {
+                if (noteId == null)
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+
+                Note note = nm.Find(x => x.Id == noteId);
+
+                if (note == null)
+                    return new HttpNotFoundResult();
+
+                comment.Note = note;
+                comment.Owner = CurrentSession.User;
+
+                if (cm.Insert(comment) > 0)
+                    return Json(new { result = true }, JsonRequestBehavior.AllowGet);
+            }
             return Json(new { result = false }, JsonRequestBehavior.AllowGet);
         }
     }

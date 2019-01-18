@@ -1,6 +1,7 @@
 ﻿using MyEvernote.Business;
 using MyEvernote.Entities;
 using MyEvernote.Web.Models;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
@@ -139,6 +140,58 @@ namespace MyEvernote.Web.Controllers
             Note note = nm.Find(x => x.Id == id);
             nm.Delete(note);
             return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        public ActionResult GetLiked(int[] ids)
+        {
+            if (CurrentSession.User != null)
+            {
+                List<int> likedNoteIds = lm.List(
+                    x => x.LikedUser.Id == CurrentSession.User.Id && ids.Contains(x.Note.Id)).Select(
+                    x => x.Note.Id).ToList();
+
+                return Json(new { result = likedNoteIds });
+            }
+            else
+            {
+                return Json(new { result = new List<int>() });
+            }
+        }
+
+        [HttpPost]
+        public ActionResult SetLikeState(int noteId, bool liked)
+        {
+            int result = 0;
+
+            Liked like = lm.Find(x => x.Note.Id == noteId && x.LikedUser.Id == CurrentSession.User.Id);
+            Note note = nm.Find(x => x.Id == noteId);
+
+            if (like != null && liked == false)
+            {
+                result = lm.Delete(like);
+            }
+            else if (like == null && liked == true)
+            {
+                result = lm.Insert(new Liked()
+                {
+                    LikedUser = CurrentSession.User,
+                    Note = note
+                });
+            }
+
+            if (result > 0)
+            {
+                if (liked)
+                    note.LikeCount++;
+                else
+                    note.LikeCount--;
+
+                result = nm.Update(note);
+
+                return Json(new { hasError = false, errorMsg = string.Empty, result = note.LikeCount });
+            }
+            return Json(new { hasError = true, errorMsg = "Beğenme işlemi gerçekleştirilemedi.", result = note.LikeCount});
         }
     }
 }

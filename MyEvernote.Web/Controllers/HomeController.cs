@@ -22,8 +22,7 @@ namespace MyEvernote.Web.Controllers
 
         public ActionResult Index()
         {
-            NoteManager nm = new NoteManager();
-            return View(nm.List().OrderByDescending(x => x.ModifiedOn).ToList());
+            return View(nm.ListQueryable().Where(x => x.IsDraft == false).OrderByDescending(x => x.ModifiedOn).ToList());
         }
 
         public ActionResult ByCategory(int? id)
@@ -33,14 +32,9 @@ namespace MyEvernote.Web.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            Category category = cm.Find(x => x.Id == id.Value);
+            List<Note> notes = nm.ListQueryable().Where(x => x.IsDraft == false && x.CategoryId == id.Value).OrderByDescending(x => x.ModifiedOn).ToList();
 
-            if (category == null)
-            {
-                return HttpNotFound();
-            }
-
-            return View("Index", category.Notes.OrderByDescending(x => x.ModifiedOn).ToList());
+            return View("Index", notes);
         }
 
         public ActionResult MostLiked()

@@ -127,6 +127,7 @@
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Images\comment-icon.jpg" />
     <Content Include="Images\user_boy.png" />
+    <Content Include="Scripts\Comment.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
@@ -136,6 +137,7 @@
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\jquery-1.9.1.js" />
     <Content Include="Scripts\jquery-1.9.1.min.js" />
+    <Content Include="Scripts\Like.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>

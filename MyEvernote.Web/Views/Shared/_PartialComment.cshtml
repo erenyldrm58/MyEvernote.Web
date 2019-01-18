@@ -26,7 +26,7 @@
                             <span class="glyphicon glyphicon-edit"></span>
                         </button>
 
-                        <button type="button" class="btn btn-danger btn-xs">
+                        <button type="button" class="btn btn-danger btn-xs" onclick="doComment(this, 'delete_clicked', @item.Id);">
                             <span class="glyphicon glyphicon-trash"></span>
                         </button>
                     </span>
@@ -36,6 +36,28 @@
                     <span class="glyphicon glyphicon-user"></span> @item.Owner.Username
                 </small>
 
+            </div>
+        </div>
+    </div>
+}
+
+
+@if (user != null)
+{
+    <div class="row">
+        <div class="col-md 12">
+            <hr />
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-10 col-lg-offset-1">
+            <div class="input-group">
+                <input type="text" id="txtNewComment" class="form-control" placeholder="Yorumunuz..">
+                <span class="input-group-btn">
+                    <button class="btn btn-success" type="button" onclick="doComment(this, 'new_clicked', -1);">
+                        <span class="glyphicon glyphicon-time"></span> Gönder
+                    </button>
+                </span>
             </div>
         </div>
     </div>
