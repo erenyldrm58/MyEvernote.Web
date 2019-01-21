@@ -1,14 +1,19 @@
 ﻿using MyEvernote.Business;
 using MyEvernote.Business.Results;
 using MyEvernote.Entities;
+using MyEvernote.Web.Filters;
 using System.Net;
 using System.Web.Mvc;
 
 namespace MyEvernote.Web.Controllers
 {
+    [Auth]
+    [AuthAdmin]
+    [Exc]
     public class UserController : Controller
     {
         private UserManager um = new UserManager();
+        
         // GET: User
         public ActionResult Index()
         {

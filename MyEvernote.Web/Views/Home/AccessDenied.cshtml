@@ -1,0 +1,15 @@
+﻿
+@{
+    ViewBag.Title = "YETKİSİZ ERİŞİM";
+}
+
+<div class="row">
+    <div class="col-md-8 col-md-offset-2">
+        <h1><span class="glyphicon glyphicon-remove-circle">  </span> Yetkisiz Erişim </h1>
+        <p>
+            Bu sayfaya erişim yetkiniz bulunmamaktadır.
+            <br /><br />
+            @MyHtmlHelper.LinkButton("/Home/Index", "primary", "", "", "home", "Ana Sayfaya Git!")
+        </p>
+    </div>
+</div>

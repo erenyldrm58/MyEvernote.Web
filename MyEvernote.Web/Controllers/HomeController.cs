@@ -3,6 +3,7 @@ using MyEvernote.Business.Results;
 using MyEvernote.Entities;
 using MyEvernote.Entities.Messages;
 using MyEvernote.Entities.ViewModels;
+using MyEvernote.Web.Filters;
 using MyEvernote.Web.Models;
 using MyEvernote.Web.ViewModels;
 using System;
@@ -14,6 +15,7 @@ using System.Web.Mvc;
 
 namespace MyEvernote.Web.Controllers
 {
+    [Exc]
     public class HomeController : Controller
     {
         private NoteManager nm = new NoteManager();
@@ -22,6 +24,11 @@ namespace MyEvernote.Web.Controllers
 
         public ActionResult Index()
         {
+            //object o = 0;
+            //int a = 1;
+            //int c = a / (int)0;
+            //throw new Exception("Bir hata oluştu!");
+
             return View(nm.ListQueryable().Where(x => x.IsDraft == false).OrderByDescending(x => x.ModifiedOn).ToList());
         }
 
@@ -48,6 +55,7 @@ namespace MyEvernote.Web.Controllers
             return View();
         }
 
+        [Auth]
         public ActionResult ShowProfile()
         {
             BusinessResult<EvernoteUser> profileResult = um.GetUserById(CurrentSession.User.Id);
@@ -66,6 +74,7 @@ namespace MyEvernote.Web.Controllers
             return View(profileResult.Result);
         }
 
+        [Auth]
         public ActionResult EditProfile()
         {
             BusinessResult<EvernoteUser> profileResult = um.GetUserById(CurrentSession.User.Id);
@@ -84,6 +93,7 @@ namespace MyEvernote.Web.Controllers
             return View(profileResult.Result);
         }
 
+        [Auth]
         [HttpPost]
         public ActionResult EditProfile(EvernoteUser model, HttpPostedFileBase ProfileImage)
         {
@@ -269,6 +279,16 @@ namespace MyEvernote.Web.Controllers
                 Items = new List<string> { "Test 1 başarılı", "Test 2 başarılı" }
             };
             return View("Ok", okModel);
+        }
+
+        public ActionResult AccessDenied()
+        {
+            return View();
+        }
+
+        public ActionResult HasError()
+        {
+            return View();
         }
     }
 }

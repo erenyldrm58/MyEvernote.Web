@@ -111,7 +111,6 @@
     <Content Include="Content\shop-homepage.css" />
     <Content Include="Content\Site.css" />
     <Content Include="Content\validationSummary.css" />
-    <Content Include="Controllers\comment-icon.jpg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -154,6 +153,9 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\NoteController.cs" />
     <Compile Include="Controllers\UserController.cs" />
+    <Compile Include="Filters\Exc.cs" />
+    <Compile Include="Filters\AuthAdmin.cs" />
+    <Compile Include="Filters\Auth.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -202,6 +204,8 @@
     <Content Include="Views\Note\Index.cshtml" />
     <Content Include="Views\Shared\_PartialComment.cshtml" />
     <Content Include="Views\Shared\_PartialNoteText.cshtml" />
+    <Content Include="Views\Home\AccessDenied.cshtml" />
+    <Content Include="Views\Home\HasError.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

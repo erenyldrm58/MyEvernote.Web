@@ -1,5 +1,6 @@
 ﻿using MyEvernote.Business;
 using MyEvernote.Entities;
+using MyEvernote.Web.Filters;
 using MyEvernote.Web.Models;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -9,12 +10,14 @@ using System.Web.Mvc;
 
 namespace MyEvernote.Web.Controllers
 {
+    [Exc]
     public class NoteController : Controller
     {
         NoteManager nm = new NoteManager();
         CategoryManager cm = new CategoryManager();
         LikedManager lm = new LikedManager();
 
+        [Auth]
         // GET: Note
         public ActionResult Index()
         {
@@ -24,6 +27,7 @@ namespace MyEvernote.Web.Controllers
             return View(nm.ListQueryable());
         }
 
+        [Auth]
         public ActionResult MyLikedNotes()
         {
             var note = lm.ListQueryable().Include("LikedUser").Include("Note")
@@ -34,6 +38,7 @@ namespace MyEvernote.Web.Controllers
             return View("Index", note.ToList());
         }
 
+        [Auth]
         // GET: Note/Details/5
         public ActionResult Details(int? id)
         {
@@ -49,6 +54,7 @@ namespace MyEvernote.Web.Controllers
             return View(note);
         }
 
+        [Auth]
         // GET: Note/Create
         public ActionResult Create()
         {
@@ -57,6 +63,7 @@ namespace MyEvernote.Web.Controllers
         }
 
         // POST: Note/Create
+        [Auth]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(Note note)
@@ -77,6 +84,7 @@ namespace MyEvernote.Web.Controllers
         }
 
         // GET: Note/Edit/5
+        [Auth]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -93,6 +101,7 @@ namespace MyEvernote.Web.Controllers
         }
 
         // POST: Note/Edit/5
+        [Auth]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(Note note)
@@ -118,6 +127,7 @@ namespace MyEvernote.Web.Controllers
         }
 
         // GET: Note/Delete/5
+        [Auth]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -133,6 +143,7 @@ namespace MyEvernote.Web.Controllers
         }
 
         // POST: Note/Delete/5
+        [Auth]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
