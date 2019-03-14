@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MyEvernote.Entities
 {
@@ -25,7 +21,7 @@ namespace MyEvernote.Entities
         [DisplayName("Taslak")]
         public bool IsDraft { get; set; }
         [DisplayName("Beğeni")]
-        public int LikeCount{ get; set; }
+        public int LikeCount { get; set; }
         [DisplayName("Kategori")]
         public int CategoryId { get; set; }
 
